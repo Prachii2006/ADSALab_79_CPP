@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+int countTrailingZeros(int n)
+{
+   int count=0;
+   while(n>0)
+   {
+    	count+=n/5;
+    	n/=5;
+   }
+   return count;
+} 
+int findNumberWithTrailingZeros(int n)
+{
+   int low=0;
+   int high=1000;
+   int result=0;
+   
+   while(low<=high)
+   {
+	int mid=(low+high)/2;
+	int zeros=countTrailingZeros(mid);
+	if(zeros>=n)
+	{
+	   result=mid;
+	   high=mid-1;
+	}
+	else
+	{
+	   low=mid+1;
+	}
+   }
+   return result;
+}
+int main()
+{
+   int n;
+   cout<<"Enter how many trailing zeros you required";
+   cin>>n;
+   
+   int result=findNumberWithTrailingZeros(n);
+   
+   if(countTrailingZeros(result)==n)
+   {
+      cout<<"The smallest no. whose factorial has at least"<< n <<"\nTrailing zeros is"<<result<<endl;
+   }
+   else
+   {
+      cout<<"Invalid input: No number exists whos factoria has at exactly"<<n<<"trailing zeros"<<endl;
+   }
+   return 0;
+}
+ 
